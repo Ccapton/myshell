@@ -16,13 +16,13 @@ class ClearCacheThread(Thread):
 
     def run(self):
         while True:
-            print('循环:判断当前时分是否为00:00')
+            print('recycle:is time equal 00:00 ?')
             if time.strftime("%H-%M",time.localtime(time.time())) == '00-00' or \
                     time.strftime("%H-%M",time.localtime(time.time())) == '0-00':
                 if self.unfinished:
-                    print('开始清理缓存')
+                    print('clear cache')
                     self.clearCache()
-                    print('清理结束')
+                    print('clear over')
             else:
                 self.unfinished=True
             time.sleep(3)
