@@ -18,7 +18,10 @@ class ClearCacheThread(Thread):
         while True:
             print('recycle:is time equal 00:00 ?')
             if time.strftime("%H-%M",time.localtime(time.time())) == '00-00' or \
-                    time.strftime("%H-%M",time.localtime(time.time())) == '0-00':
+                    time.strftime("%H-%M",time.localtime(time.time())) == '0-00' or \
+                    time.strftime("%H-%M",time.localtime(time.time())) == '12-00' or \
+                    time.strftime("%H-%M",time.localtime(time.time())) == '06-00' or \
+                    time.strftime("%H-%M",time.localtime(time.time())) == '18-00' :
                 if self.unfinished:
                     print('clear cache')
                     self.clearCache()
@@ -30,17 +33,12 @@ class ClearCacheThread(Thread):
     def clearCache(self):
         os.system('sync')
         os.system('echo 1 > /proc/sys/vm/drop_caches')
-        os.system('echo 0 > /proc/sys/vm/drop_caches')
+        os.system('echo 2 > /proc/sys/vm/drop_caches')
+        os.system('echo 3 > /proc/sys/vm/drop_caches')
         self.unfinished=False
 
 
 
 if __name__ == '__main__':
     ClearCacheThread().start()
-    
-
-
-
-
-
 
